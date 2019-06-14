@@ -41,11 +41,12 @@ def sold(request):
 
     if request.method == 'POST':
 
-        to_sell = Item.object.get(id=request.POST['sold'])
+        #to_sell = Item.object.get(id=request.POST['sold_assets'])
+        item = Item.objects.get(id=request.POST.get('id'))
 
-        to_sell.sold = request.POST['sold']
+        item.sold_assets = False
 
-        to_sell.save()
+        item.save()
 
         return redirect('portfolio')
     return redirect('portfolio')
