@@ -1,22 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Item
+from .models import Item 
 
 def index(request):
     return render(request, 'finance_app/home.html')
 
 def view_portfolio(request):
 
-    port_items = Item.objects.filter(sold_assets=False)
-
+    current_items = Item.objects.filter(sold_assets=False)
+  
+       
+        
+    
     sold_items = Item.objects.filter(sold_assets=True)
 
     context = {
-        'current' : port_items,
+        'current' : current_items,
         'sold' : sold_items
     }
-
-    print(port_items)
+    print(current_items)
 
     return render(request, 'finance_app/view_portfolio.html', context=context)
 
@@ -24,10 +26,11 @@ def buy_asset(request):
     
     if request.method == 'POST':
 
-        new_asset = Item(asset_name=request.POST['asset name'],
-                        asset_class=request.POST['asset class'],
-                        asset_price=request.POST['asset price'],
-                        asset_quantity=request.POST['asset quantity'])
+        new_asset = Item()
+        new_asset.asset_name=request.POST.get('asset_name')
+        new_asset.asset_class=request.POST.get('asset_class')
+        new_asset.price=request.POST.get('price')
+        new_asset.quantity=request.POST.get('quantity')
         new_asset.save()
 
         return redirect('portfolio')

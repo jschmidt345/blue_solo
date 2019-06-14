@@ -2,6 +2,59 @@
 {% block content %}
 
 
+<div class='container'>
+    <br>
+    <h3 class='table_heading'>Your Portfolio<h3>
+    <a href="{% url 'add' %}" class="btn btn-dark add_item">Purchase Asset</a>
+    <br>
+    <br>
+    <div class='Portfolio'>
+        <table class="table table-striped table-light">
+  <thead class = 'thead-dark' >
+    <tr>
+      <th scope="col">Asset ID</th>
+      <th scope="col">Asset Name</th>
+      <th scope="col">Asset Class</th>
+      <th scope="col">Asset Price</th>
+      <th scope='col'>Quantity of Asset</th>
+      <th scope='col'>Hide Asset</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    {% if current%}
+        {% for item in current %}
+          
+    <tr>
+      <th scope="row">1</th>
+      <td>{{ item.asset_name }}</td>
+      <td>{{ item.asset_class }}</td>
+      <td>{{ item.price }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>
+        <form action="{% url 'delete' %}" method='POST'>
+            {% csrf_token %}
+            <input type='hidden' name='id' value="{{ item.id }}">
+            <input class='btn btn-danger' type='submit' value='Hide'>
+        </form>
+      </td>
+    </tr> 
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td>No items in your list</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    {% endif %}
+
+    
+  </tbody>
+</table>
+
+
+{% endblock %}
 
 
 
@@ -10,4 +63,3 @@
 
 
 
-{% endblock content %}
