@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<br>
+    <br>
+    <div class="container">
+        <form class="add_form" action="{% url 'add' %}" method="POST">
+            {% csrf_token %}
+            <a class="btn btn-info" href="{% url 'portfolio' %}">Go Back</a>
+            <br>
+            <br>
+            <div class="form-group">
+                <label for="name">Name of Item</label>
+                <input name="name" type="text" class="form-control" placeholder="ex: Carrots">
+            </div>
+            <div class="form-group">
+                <label for="">Amount To Get</label>
+                <input name="amount" placeholder="ex: 1 gal, 2 lb" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+                <label for="">Estimated Price</label>
+                <input name="price" type="number" step="0.01" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success form_submit">
+            </div>
+        </form>
+    </div>
+{% comment %} <form>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationServer01">First name</label>
+      <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationServer02">Last name</label>
+      <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required> 
+    </div
+    <div class="col-md-4 mb-3">
+      <label for="validationServerUsername">Username</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3">@</span>
+        </div>
+        <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationServer03">City</label>
+      <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
+    </div> {% endcomment %}
+    
+
+{% endblock content%}
