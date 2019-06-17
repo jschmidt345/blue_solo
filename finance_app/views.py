@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Item, PlotItem
-
+from .models import Item
+import numpy as np
 
 def index(request):
     return render(request, 'finance_app/home.html')
@@ -44,10 +44,15 @@ def sold(request):
 
         #to_sell = Item.object.get(id=request.POST['sold_assets'])
         item = Item.objects.get(id=request.POST.get('id'))
-
+        updated_price = ((item.price * np.random.randint(-5,5)) + item.price)
+        item.price = updated_price
+        
         item.sold_assets = True
 
         item.save()
+        
+        
+        
 
         return redirect('portfolio')
     return redirect('portfolio')
@@ -67,13 +72,15 @@ def delete(request):
 # make another page for inputing data, this then is plugged into a function that generates and prints a graph
 # make a login page that uses boolean to bring up database
 
-def create_plot(request):
+# def create_plot(request):
     
-    if request.method == 'POST':
+#     if request.method == 'POST':
         
-        plot_items = PlotItem()
-        plot_item.x_value = request.POST.get('x_value')
-        plot_item.y_value = request.POST.get('y_value')
-        plot_items.save()
-        
+#         plot_items = PlotItem()
+#         plot_item.x_value = request.POST.get('x_value')
+#         plot_item.y_value = request.POST.get('y_value')
+#         plot_items.save()
+
+# randomly apply changes in price when asset is sold
+
         

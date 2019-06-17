@@ -10,7 +10,7 @@ class Item(models.Model):
 
     # def __str__(self):
     #     return self.asset_name
-class PlotItem(models.Model):
-    x_value = models.DecimalField(max_digits=30, decimal_places=2)
-    y_value = models.DecimalField(max_digits=30, decimal_places=2)
+# class PlotItem(models.Model):
+#     x_value = models.DecimalField(max_digits=30, decimal_places=2)
+#     y_value = models.DecimalField(max_digits=30, decimal_places=2)
 
