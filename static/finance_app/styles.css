@@ -1,3 +1,7 @@
 body{
     background-color: black;
 }
+
+#table_heading{
+    margin-left: 300px;
+}
