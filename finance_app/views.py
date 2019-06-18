@@ -1,27 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse
 from .models import Item
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 def index(request):
     return render(request, 'finance_app/home.html')
-
-def view_portfolio(request):
-
-    current_items = Item.objects.filter(sold_assets=False)
-  
-       
-        
-    
-    sold_items = Item.objects.filter(sold_assets=True)
-
-    context = {
-        'current' : current_items,
-        'sold' : sold_items
-    }
-    print(current_items)
-
-    return render(request, 'finance_app/view_portfolio.html', context=context)
 
 def buy_asset(request):
     
@@ -32,17 +17,53 @@ def buy_asset(request):
         new_asset.asset_class=request.POST.get('asset_class')
         new_asset.price=int(request.POST.get('price'))
         new_asset.quantity=int(request.POST.get('quantity'))
+        new_asset.value_sum_current=new_asset.price * new_asset.quantity
+        new_asset.value_sum_sold=new_asset.price * new_asset.quantity
+        #new.asset.port_return=(new_asset.value_sum_sold - new_asset.value_sum_current)/new_asset.value_sum_current
         new_asset.save()
-
+        
         return redirect('portfolio')
     
+    
+
     return render(request, 'finance_app/add_asset.html')
+
+def view_portfolio(request):
+    
+    current_items = Item.objects.filter(sold_assets=False)
+    total = 0
+    for i in current_items:
+        total += i.value_sum_current
+    
+    print(total)
+        
+    
+    sold_items = Item.objects.filter(sold_assets=True)
+    total_sold = 0
+    for i in sold_items:
+        total_sold += i.value_sum_sold
+
+    returns = (total_sold - total)/total
+
+    context = {
+        'current' : current_items,
+        'sold' : sold_items,
+        'total' : total, 
+        'total_sold' : total_sold,
+        'returns' : returns
+    }
+    print(current_items)
+   
+
+    return render(request, 'finance_app/view_portfolio.html', context=context)
+
+
+    
 
 def sold(request):
 
     if request.method == 'POST':
 
-        #to_sell = Item.object.get(id=request.POST['sold_assets'])
         item = Item.objects.get(id=request.POST.get('id'))
         updated_price = ((item.price * np.random.randint(-5,5)) + item.price)
         item.price = updated_price
@@ -57,6 +78,21 @@ def sold(request):
         return redirect('portfolio')
     return redirect('portfolio')
 
+def returns(request):
+    if request.method == 'POST':
+    
+
+        item = Item.objects.get(id=request.POST.get('id'))
+        updated_price = ((item.price * np.random.randint(-5,5)) + item.price)
+        item.returns = ((updated_price - item.price)/item.price)
+        print(item.returns)
+        item.save()
+
+    return redirect('portfolio')
+    
+    
+
+
 def delete(request):
 
     if request.method == 'POST':
@@ -69,18 +105,5 @@ def delete(request):
     
     return redirect('portfolio')
 
-# make another page for inputing data, this then is plugged into a function that generates and prints a graph
-# make a login page that uses boolean to bring up database
-
-# def create_plot(request):
-    
-#     if request.method == 'POST':
-        
-#         plot_items = PlotItem()
-#         plot_item.x_value = request.POST.get('x_value')
-#         plot_item.y_value = request.POST.get('y_value')
-#         plot_items.save()
-
-# randomly apply changes in price when asset is sold
 
         

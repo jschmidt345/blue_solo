@@ -6,11 +6,13 @@ class Item(models.Model):
     asset_class = models.CharField(max_length=30)
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
     price = models.DecimalField( max_digits=10, decimal_places=2)
-    sold_assets = models.BooleanField(default = False)
+    sold_assets = models.BooleanField(default=False)
+    returns = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    value_sum_current = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    value_sum_sold = models.DecimalField( max_digits=10, decimal_places=2, default=0)
+    port_return = models.DecimalField(max_digits=10,  decimal_places=2, default=0)
 
-    # def __str__(self):
-    #     return self.asset_name
-# class PlotItem(models.Model):
-#     x_value = models.DecimalField(max_digits=30, decimal_places=2)
-#     y_value = models.DecimalField(max_digits=30, decimal_places=2)
+
+
+
 
