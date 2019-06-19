@@ -19,7 +19,7 @@ def buy_asset(request):
         new_asset.quantity=int(request.POST.get('quantity'))
         new_asset.value_sum_current=new_asset.price * new_asset.quantity
         new_asset.value_sum_sold=new_asset.price * new_asset.quantity
-        #new.asset.port_return=(new_asset.value_sum_sold - new_asset.value_sum_current)/new_asset.value_sum_current
+        new_asset.port_return=(new_asset.value_sum_sold - new_asset.value_sum_current)/(new_asset.value_sum_current)
         new_asset.save()
         
         return redirect('portfolio')
@@ -42,15 +42,18 @@ def view_portfolio(request):
     total_sold = 0
     for i in sold_items:
         total_sold += i.value_sum_sold
-
-    returns = (total_sold - total)/total
-
+    
+    if total > 0:
+        returns = (total_sold - total)/total
+    else:
+        returns = 1
+    
     context = {
         'current' : current_items,
         'sold' : sold_items,
         'total' : total, 
         'total_sold' : total_sold,
-        'returns' : returns
+        'returns' : round(returns,2)
     }
     print(current_items)
    
@@ -65,7 +68,7 @@ def sold(request):
     if request.method == 'POST':
 
         item = Item.objects.get(id=request.POST.get('id'))
-        updated_price = ((item.price * np.random.randint(-5,5)) + item.price)
+        updated_price = ((item.price * np.random.randint(-2,2)) + item.price)
         item.price = updated_price
         
         item.sold_assets = True
@@ -83,7 +86,7 @@ def returns(request):
     
 
         item = Item.objects.get(id=request.POST.get('id'))
-        updated_price = ((item.price * np.random.randint(-5,5)) + item.price)
+        updated_price = ((item.price * np.random.randint(-2,2)) + item.price)
         item.returns = ((updated_price - item.price)/item.price)
         print(item.returns)
         item.save()

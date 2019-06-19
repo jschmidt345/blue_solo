@@ -6,15 +6,26 @@
 <br>
 <br>
 <div class='container'>
-<h1 id='header_port' class='table_heading'>Your Portfolio<h1>
+  <h1 id='header_port' class='table_heading'>Your Portfolio</h1>
 
-<a href="{% url 'add' %}" class="btn btn-dark add_item">Purchase Asset</a>
+  <a href="{% url 'add' %}" class="purchase_button btn btn-dark add_item">Purchase Asset</a>
 </div>
-<div id='stats'class='container'>
-{{ total }}
-{{ total_sold }}
-{{ returns }}
+<div class="my_card card bg-light mb-3">
+    <div class="card-header">Value of Current Assets</div>
+    <div class="card-body">${{ total }}</div>
 </div>
+<div class="my_card2 card bg-light mb-3">
+    <div class="card-header">Value of Sold Assets</div>
+    <div class="card-body">${{ total_sold }} </div>
+</div>
+<div class="my_card3 card bg-light mb-3">
+    <div class="card-header">Returns on Assets Sold</div>
+    <div class="card-body">{{ returns }}%</div>
+</div>
+
+
+
+
 
 <div class='container'>
     
@@ -40,7 +51,6 @@
       <td>{{ item.asset_class }}</td>
       <td>${{ item.price }}</td>
       <td>{{ item.quantity }}</td>
-      <td>{{ item.value_sum }}<td>
       <td>
         <form action="{% url 'sold' %}" method="POST">
           {% csrf_token %}
@@ -121,7 +131,7 @@
 
 
 
-{% endblock %}
+{% endblock content%}
 
 
 

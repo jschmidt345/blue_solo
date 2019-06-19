@@ -13,6 +13,49 @@ background-image: url("https://www.transparenttextures.com/patterns/old-mathemat
 #stats{
     margin-left: 300%;
 }
-
-
+.my_card{
+    width: 300px !important;
+    margin-left: 900px;
+    margin-top: -80px;
+    height: 100px;
     
+}
+.my_card2{
+    width: 300px !important;
+    margin-left: 900px;
+    margin-top: -10px;
+    height: 100px;
+}
+.my_card3{
+    width: 300px;
+    margin-left: 900px;
+    margin-top: -10px;
+    height: 100px;
+}    
+
+.purchase_button{
+    
+    width: 250px;
+    margin-bottom: -100px;
+    height: 70px;
+    font-size: 30px;
+}
+#header_port{
+    font-size: 70px;
+}
+.btn_back{
+    margin-left: 950px;
+    width: 150px;
+}
+
+.success_button{
+    margin-left: 300px;
+    width: 450px;
+    margin-top: 20px;
+}
+.blockquote{
+    font-size: 30px;
+}
+.carousel-item{
+    height: 500px;
+}
