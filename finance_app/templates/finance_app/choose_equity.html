@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<br>
+    <br>
+    <div class="container">
+        <form class="add_form" action="{% url 'visual' %}" method="POST">
+            {% csrf_token %}
+            
+            <a class="btn_back btn btn-dark" href="http://127.0.0.1:8000">Go Home</a>
+            <br>
+            <br>
+            <div class="form-group">
+                <label for="name">Name of Stock</label>
+                <input name="equity_name" type="text" class="name_form form-control" placeholder='Ex: AAPL, AMZN, GM'>
+            </div>
+            <div class="form-group">
+              <label for="name">Class of Asset</label>
+              <input name="equity_name2" type="text" class="name_form form-control" placeholder='Ex: AAPL, AMZN, GM'>
+            </div>
+            <div class="form-group">
+                <label for="">Amount To Get</label>
+                <input name="equity_name3" type="text" placeholder='Ex: AAPL, AMZN, GM'>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="success_button btn btn-outline-success form_submit ">
+            </div>
+        </form>
+    </div>
+    </br>
+</br>    
+<div class="container mt-5 mb-5">
+        <h1 class="fred_link display-4">Find Ticker Symbols</h1>
+        <div class="row mt-4">
+            <div class="col-4">
+                <div class="card my_shadow" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Standard and Poors 500 Tickers </h5>
+                        <p class="fred_link card-text"></p>
+                        <a target='blank'href='https://www.slickcharts.com/sp500' class="btn btn-dark">Go to S&P Tickers</a>
+                    </div>
+                </div>
+            </div>
+<br>
+            <div class="col-4">
+                <div class="card my_shadow" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Dow Jones Industrial Tickers</h5>
+                        <p class="card-text"></p>
+                        <a target='blank'href="https://www.marketwatch.com/tools/quotes/lookup.asp?lookup=ym" class="btn btn-dark">Go to DJIA Tickers</a>
+                    </div>
+                </div>
+            </div>
+<br>
+            <div class="col-4">
+                <div class="card my_shadow" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">NASDAQ Tickers</h5>
+                        <p class="card-text"></p>
+                        <a target='blank'href="https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ" class="btn btn-dark">Go to NASDAQ Tickers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% comment %} {% for i in equity_items %}
+
+    {{ 'plot 1' }}
+    {{ 'plot 2' }}
+    {{ 'plot 3' }}
+
+{% endfor %} {% endcomment %}
+
+{% endblock content %}

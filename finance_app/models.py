@@ -13,6 +13,12 @@ class Item(models.Model):
     port_return = models.DecimalField(max_digits=10,  decimal_places=2, default=0)
 
 
+class Stock(models.Model):
+    stock1 = models.CharField(max_length=30)
+    stock2 = models.CharField(max_length=30)
+    stock3 = models.CharField(max_length=39)
 
+
+#inputtype = date
 
 

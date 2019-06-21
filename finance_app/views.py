@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse
-from .models import Item
+from .models import Item, Stock
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
+import pandas_datareader
+import datetime
+import pandas_datareader.data as web
+import os
 
 
 def index(request):
@@ -27,6 +32,58 @@ def buy_asset(request):
     
 
     return render(request, 'finance_app/add_asset.html')
+def choose_equity(request):
+
+    if request.method == 'POST':
+        chosen_stock = Stock()
+        chosen_stock.stock1=str(request.POST.get('equity_name'))
+        # chosen_stock.stock2=str(request.POST.get('equity_name2'))
+        chosen_stock.save()
+    
+        return redirect('choose')
+    
+    return render(request,'finance_app/choose_equity.html')
+
+def display_data(stock1):
+    start = datetime.datetime(2012, 1, 1)
+    end = datetime.datetime(2019, 2, 1)
+    equity1 = web.DataReader(stock1, 'yahoo', start, end)
+    # equity2 = web.DataReader(stock2, 'yahoo', start, end)
+    
+   
+    
+    
+    plot1 = equity1['Open'].plot(title='Open Price')
+    plt.grid()
+    plt.ylabel('Price')
+    plt.xlabel('Years')
+    plt.legend()
+
+
+    my_path = "/Users/jschmidt/Desktop/pythonbootcam/workspace/blue_badge_ind/finance_project/finance_app/static/finance_app/graphs"
+    plt.savefig(my_path+'/plot1.png')
+    
+    plot2 = equity1['Volume'].plot(title='Trading Volume')
+    plt.grid()
+    plt.ylabel('Volume')
+    plt.xlabel('Years')
+    plt.savefig(my_path+'/plot2.png')    
+    my_path = "/Users/jschmidt/Desktop/pythonbootcam/workspace/blue_badge_ind/finance_project/finance_app/static/finance_app/graphs"
+
+    plot3 = equity1['Close'].plot(title='Close Price')
+    plt.grid()
+    plt.ylabel('Price')
+    plt.xlabel('Years')
+    plt.savefig(my_path+'/plot3.png')
+
+
+def display_equity(request):
+    display_data(request.POST['equity_name'])
+    
+     
+    
+    return render(request, 'finance_app/view_plot.html')
+
 
 def view_portfolio(request):
     

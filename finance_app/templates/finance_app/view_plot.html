@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% comment %} {% for i in equity_items %} {% endcomment %}
+
+<img style="width: 50%; height: 50%;" alt="Image description"src="{% static 'finance_app/graphs/plot1.png' %}"/>
+<img style="width: 50%; height: 50%;" alt="Image description" src="{% static 'finance_app/graphs/plot2.png' %}"/>
+<img style="width: 50%; height: 50%;" alt="Image description" src="{% static 'finance_app/graphs/plot3.png' %}"/>
+
+{% comment %} <img style="width: 245px; height: 247px;" alt="Image description"src="{% static 'finance_app/graphs/plot2.png' %}"/> {% endcomment %}
+{% comment %} <img style="width: 245px; height: 247px;" alt="Image description"src="{% static 'finance_app/graphs/plot3.png' %}"/> {% endcomment %} 
+
+{% comment %} {% endfor %} {% endcomment %}
+
+{% endblock content %}
