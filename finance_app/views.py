@@ -47,10 +47,8 @@ def choose_equity(request):
 def display_data(stock1):
     start = datetime.datetime(2012, 1, 1)
     end = datetime.datetime(2019, 2, 1)
-    equity1 = web.DataReader(stock1, 'yahoo', start, end)
-    # equity2 = web.DataReader(stock2, 'yahoo', start, end)
     
-   
+    equity1 = web.DataReader(stock1, 'yahoo', start, end)
     
     
     plot1 = equity1['Open'].plot(title='Open Price')
@@ -63,19 +61,31 @@ def display_data(stock1):
     my_path = "/Users/jschmidt/Desktop/pythonbootcam/workspace/blue_badge_ind/finance_project/finance_app/static/finance_app/graphs"
     plt.savefig(my_path+'/plot1.png')
     
+    s_p_dat = web.DataReader('^GSPC','yahoo',start, end)
+    s_p_plot = s_p_dat['Open'].plot(title='Open Price')
+    plt.grid()
+    plt.ylabel('Price')
+    plt.xlabel('Years')
+    plt.legend()
+    plt.savefig(my_path+'/s_p_plot.png')
+    
     plot2 = equity1['Volume'].plot(title='Trading Volume')
     plt.grid()
     plt.ylabel('Volume')
     plt.xlabel('Years')
-    plt.savefig(my_path+'/plot2.png')    
-    my_path = "/Users/jschmidt/Desktop/pythonbootcam/workspace/blue_badge_ind/finance_project/finance_app/static/finance_app/graphs"
+    plt.legend()
+      
+    plt.savefig(my_path+'/plot2.png')   
 
-    plot3 = equity1['Close'].plot(title='Close Price')
-    plt.grid()
-    plt.ylabel('Price')
-    plt.xlabel('Years')
-    plt.savefig(my_path+'/plot3.png')
+    # plot3 = equity1['Close'].plot(title='Close Price')
+    # plt.grid()
+    # plt.ylabel('Price')
+    # plt.xlabel('Years')
+    # plt.legend()
+    
+    # plt.savefig(my_path+'/plot3.png')
 
+    
 
 def display_equity(request):
     display_data(request.POST['equity_name'])
