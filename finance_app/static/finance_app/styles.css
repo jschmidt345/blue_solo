@@ -1,5 +1,5 @@
-.jumbotron{
-    height: 300px;
+.my_jumbo{
+    height:250px;
     color: black;
     background-image: url("https://www.transparenttextures.com/patterns/old-mathematics.png");
    
@@ -58,4 +58,7 @@ background-image: url("https://www.transparenttextures.com/patterns/old-mathemat
 }
 .carousel-item{
     height: 500px;
+}
+.carousel_data{
+    color: black
 }
