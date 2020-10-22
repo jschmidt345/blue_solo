@@ -58,7 +58,7 @@ def display_data(stock1):
     plt.legend()
 
 
-    my_path = "/Users/jschmidt/Desktop/pythonbootcam/workspace/blue_badge_ind/finance_project/finance_app/static/finance_app/graphs"
+    my_path = "/Users/jschmidt345/Code/web_app/blue_solo/finance_app/static/finance_app/graphs"
     plt.savefig(my_path+'/plot1.png')
     
     s_p_dat = web.DataReader('^GSPC','yahoo',start, end)
